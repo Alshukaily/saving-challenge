@@ -4,8 +4,8 @@ FROM node:22-alpine AS builder
 # Set working directory
 WORKDIR /app
 
-# Install build tools required for native modules if needed
-RUN apk add --no-co-cache python3 make g++
+# Install build tools required for native modules
+RUN apk add --no-cache python3 make g++
 
 # Copy package files
 COPY package*.json ./
@@ -24,8 +24,8 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-# Install build dependencies for better-sqlite3 runtime if needed
-RUN apk add --no-co-cache python3 make g++
+# Install build dependencies for better-sqlite3 runtime
+RUN apk add --no-cache python3 make g++
 
 # Set Environment Variables
 ENV NODE_ENV=production
