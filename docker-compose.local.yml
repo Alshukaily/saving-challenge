@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   saving-challenge:
-    image: ghcr.io/alshukaily/saving-challenge:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: saving_challenge_app
     restart: unless-stopped
     ports:
