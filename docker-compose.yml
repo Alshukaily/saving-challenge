@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  saving-challenge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: saving_challenge_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - DB_PATH=/app/data/saving_challenge.sqlite
+      - JWT_SECRET=local-network-saving-challenge-secret-key-2026
+    volumes:
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/auth/me"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
